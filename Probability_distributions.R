@@ -16,7 +16,9 @@ data("Pima.tr")
 # Explore Data: Histogram
 #=====================================================
 ggplot(Pima.tr, aes(x = bmi)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 20, fill = "skyblue", color = "white") +
+  geom_histogram(aes(y = after_stat(density)), bins = 20, 
+                 fill = "skyblue", color = "white") +
+  geom_density(color = "black", linewidth = 1) +
   labs(title = "Values of BMI in Pima.tr", x = "BMI", y = "Probability Density") +
   theme_minimal()
 
@@ -40,7 +42,8 @@ plot(fit_gamma)
 #=====================================================
 Pima.tr %>%
   ggplot(aes(x = bmi)) +
-  geom_histogram(aes(y = after_stat(density)), bins = 20, fill = "skyblue", color = "white", alpha = 0.6) +
+  # Empirical density (kernel density estimate)
+  geom_density(color = "black", linewidth = 1) +
   # Normal
   stat_function(fun = dnorm, 
                 args = list(mean = fit_norm$estimate["mean"], 
